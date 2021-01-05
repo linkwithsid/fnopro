@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Options Strategy Builder &amp; Analyzer Online — FnoPro</title>
+
+    <meta name="description" content="Create &amp; Analyze options strategies, view options strategy P/L graph – online and 100% free.">
+
+    
+    <meta property="og:title" content="Options Strategy Builder &amp; Analyzer Online — FnoPro">
+    
+    
+    <link rel="stylesheet" href="./FnoPro_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./FnoPro_files/bootstrap-theme.min.css">
+
+<link href="./FnoPro_files/fnoPro" rel="stylesheet">
+
+    <script src="./FnoPro_files/jquery.min.js"></script><style></style>
+    <script>window.jQuery || document.write('<script src="/js/external/jQuery/jquery-1.11.3.min.js"><\/script>')</script>
+    <script src="./FnoPro_files/bootstrap.min.js"></script>
+    <script>$.fn.modal || document.write('<script src="/js/external/bootstrap/bootstrap.min.js"><\/script>')</script>
+    <script>
+        
+    $(document).ready(function () {
+        var bodyColor = $('body').css('color');
+        if (bodyColor != 'rgb(51, 51, 51)') {
+            $("head").prepend('<link rel="stylesheet" href="/css/bootstrap.min.css">');
+        }
+    });
+    </script>
+
+    <script src="./FnoPro_files/mainScripts"></script>
+
+        <script src="./FnoPro_files/highcharts.js"></script>
+        <script>window.Highcharts || document.write('<script src="/js/external/highcharts/highcharts.min.js"><\/script>')</script>
+
+    <script src="./FnoPro_files/grid-light.js"></script><link href="./FnoPro_files/css" rel="stylesheet" type="text/css">
+    
+
+    <script src="./FnoPro_files/optionsStrategyBuilderView"></script>
+
+
+    <script type="text/javascript">
+        var isCreateNewStrategyPage = false;
+        var strategyId = "";
+        
+        var isSavedStrategy = false;
+        var isStandardStrategy = false;
+        var strategyBuilderFromJson = '';
+    </script>
+
+
+</head>
+<body>
+
+    <div class="container" id="pageContainer" style="visibility: visible">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://fnopro.com/"><b>FnoPro </b></a>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+    <div class="page-header">
+        <h1>FnO Strategy Builder</h1>
+    </div>
+
+
+
+
+
+<div class="row main_parameters">
+    <div class="col-md-2 col-sm-3">
+        <div class="form-group">
+            <label class="control-label">CMP - Current Price</label>
+            <input type="text" id="price" class="form-control" value="">
+            <div class="help-block"></div>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-md-12">
+        <table id="portfolio_table" class="table table-bordered table-striped table-hover results_table options_strategy_table">
+            <thead>
+                <tr>
+                    <th>
+                        Buy(+)/Sell(-)
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Call / Put / Future
+                    </th>
+                    <th>
+                        Strike
+                    </th>
+                    <th>
+                        Days to Expiry
+                    </th>
+                    <th>
+                        Volatility, %
+                    </th>
+                    <th title="The premium per option, or price per stock that you buy / sell.">
+                        Premium
+                    </th>
+                    
+                    <th title="The net amount of money that you pay (the amount is negative in this case) or receive (the amount is positive then) when you buy / sell an option or a stock.">
+                        Debit / Credit
+                    </th>
+                    <th>
+                        &nbsp;
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<button id="btn_add_position" class="btn btn-link">
+    <span class="glyphicon glyphicon-plus"></span> Add Position
+</button>
+
+
+<h2>Payoff Chart</h2>
+<hr>
+
+<div class="row chart_parameters">
+    <div class="col-md-2 col-sm-3">
+        <div class="form-group">
+            <label class="control-label">Days from Today</label>
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default decrease">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                </span>
+                <input type="text" id="chartDaysFromToday" class="form-control">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default increase">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </span>
+            </div>
+            <div class="help-block"></div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-3">
+        <div class="form-group">
+            <label class="control-label" for="chartVolatility">Volatility</label>
+            <div class="input-group">
+                <input type="text" id="chartVolatility" class="form-control" value="">
+                <div class="input-group-addon">%</div>
+            </div>
+            <div class="help-block"></div>
+        </div>
+    </div>
+</div>
+
+<div id="highChartsContainer" style="min-width: 310px; height: 500px; max-width: 100%; width: 100%; margin: 0 auto" data-highcharts-chart="0"><div class="highcharts-container" id="highcharts-0" style="position: relative; overflow: hidden; width: 1140px; height: 500px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Dosis, sans-serif; touch-action: none;"><svg version="1.1" style="font-family:Dosis, sans-serif;font-size:12px;" xmlns="http://www.w3.org/2000/svg" width="1140" height="500"><desc>Created with Highcharts 4.1.5</desc><defs><clippath id="highcharts-1"><rect x="0" y="0" width="1061" height="431"></rect></clippath></defs><g class="highcharts-grid" zIndex="1"><path fill="none" d="M 125.5 10 L 125.5 441" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 220.5 10 L 220.5 441" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 314.5 10 L 314.5 441" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 409.5 10 L 409.5 441" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 504.5 10 L 504.5 441" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 599.5 10 L 599.5 441" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 693.5 10 L 693.5 441" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 788.5 10 L 788.5 441" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 883.5 10 L 883.5 441" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 977.5 10 L 977.5 441" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 1072.5 10 L 1072.5 441" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path></g><g class="highcharts-grid" zIndex="1"><path fill="none" d="M 69 441.5 L 1130 441.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 432.5 L 1130 432.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 424.5 L 1130 424.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 415.5 L 1130 415.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 407.5 L 1130 407.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 398.5 L 1130 398.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 389.5 L 1130 389.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 381.5 L 1130 381.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 372.5 L 1130 372.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 363.5 L 1130 363.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 355.5 L 1130 355.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 346.5 L 1130 346.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 338.5 L 1130 338.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 329.5 L 1130 329.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 320.5 L 1130 320.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 312.5 L 1130 312.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 303.5 L 1130 303.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 294.5 L 1130 294.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 286.5 L 1130 286.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 277.5 L 1130 277.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 269.5 L 1130 269.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 260.5 L 1130 260.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 251.5 L 1130 251.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 243.5 L 1130 243.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 234.5 L 1130 234.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 226.5 L 1130 226.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 217.5 L 1130 217.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 208.5 L 1130 208.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 200.5 L 1130 200.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 191.5 L 1130 191.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 182.5 L 1130 182.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 174.5 L 1130 174.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 165.5 L 1130 165.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 157.5 L 1130 157.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 148.5 L 1130 148.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 139.5 L 1130 139.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 131.5 L 1130 131.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 122.5 L 1130 122.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 113.5 L 1130 113.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 105.5 L 1130 105.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 96.5 L 1130 96.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 88.5 L 1130 88.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 79.5 L 1130 79.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 70.5 L 1130 70.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 62.5 L 1130 62.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 53.5 L 1130 53.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 44.5 L 1130 44.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 36.5 L 1130 36.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 27.5 L 1130 27.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 19.5 L 1130 19.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 10.5 L 1130 10.5" stroke="#E0E0E0" stroke-width="0px" opacity="1"></path><path fill="none" d="M 69 441.5 L 1130 441.5" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 69 398.5 L 1130 398.5" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 69 355.5 L 1130 355.5" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 69 312.5 L 1130 312.5" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 69 269.5 L 1130 269.5" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 69 226.5 L 1130 226.5" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 69 182.5 L 1130 182.5" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 69 139.5 L 1130 139.5" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 69 96.5 L 1130 96.5" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 69 53.5 L 1130 53.5" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path><path fill="none" d="M 69 10.5 L 1130 10.5" stroke="#D8D8D8" stroke-width="1" zIndex="1" opacity="1"></path></g><path fill="none" d="M 69 269 L 1130 269" stroke="rgb(180, 180, 180)" stroke-width="2" zIndex="1"></path><g class="highcharts-axis" zIndex="2"><path fill="none" d="M 125.5 441 L 125.5 451" stroke="#C0D0E0" stroke-width="1" opacity="1"></path><path fill="none" d="M 220.5 441 L 220.5 451" stroke="#C0D0E0" stroke-width="1" opacity="1"></path><path fill="none" d="M 314.5 441 L 314.5 451" stroke="#C0D0E0" stroke-width="1" opacity="1"></path><path fill="none" d="M 409.5 441 L 409.5 451" stroke="#C0D0E0" stroke-width="1" opacity="1"></path><path fill="none" d="M 504.5 441 L 504.5 451" stroke="#C0D0E0" stroke-width="1" opacity="1"></path><path fill="none" d="M 599.5 441 L 599.5 451" stroke="#C0D0E0" stroke-width="1" opacity="1"></path><path fill="none" d="M 693.5 441 L 693.5 451" stroke="#C0D0E0" stroke-width="1" opacity="1"></path><path fill="none" d="M 788.5 441 L 788.5 451" stroke="#C0D0E0" stroke-width="1" opacity="1"></path><path fill="none" d="M 883.5 441 L 883.5 451" stroke="#C0D0E0" stroke-width="1" opacity="1"></path><path fill="none" d="M 977.5 441 L 977.5 451" stroke="#C0D0E0" stroke-width="1" opacity="1"></path><path fill="none" d="M 1072.5 441 L 1072.5 451" stroke="#C0D0E0" stroke-width="1" opacity="1"></path><text x="599.5" zIndex="7" text-anchor="middle" transform="translate(0,0)" class=" highcharts-xaxis-title" style="color:#707070;fill:#707070;" visibility="visible" y="481.5">Price</text><path fill="none" d="M 69 441.5 L 1130 441.5" stroke="#C0D0E0" stroke-width="1" zIndex="7" visibility="visible"></path></g><g class="highcharts-axis" zIndex="2"><text x="25.859375" zIndex="7" text-anchor="middle" transform="translate(0,0) rotate(270 25.859375 225.5)" class=" highcharts-yaxis-title" style="color:#707070;text-transform:uppercase;fill:#707070;" visibility="visible" y="225.5"><tspan>Profit / Loss</tspan></text></g><g class="highcharts-series-group" zIndex="3"><g class="highcharts-series highcharts-tracker" visibility="visible" zIndex="0.1" transform="translate(69,10) scale(1 1)" style="" clip-path="url(#highcharts-1)"><path fill="none" d="M 0 274.86421600000006 L 30.31428571428561 271.640336 L 60.62857142857122 268.399216 L 90.94285714285736 265.14430400000003 L 121.25714285714298 261.87732400000004 L 151.57142857142858 258.6 L 151.57142857142858 258.6 L 181.8857142857142 255.31578000000002 L 212.1999999999998 252.02638800000003 L 242.51428571428596 248.733548 L 272.82857142857154 245.44070800000003 L 303.14285714285717 242.149592 L 333.4571428571428 238.86192400000002 L 363.7714285714284 235.579428 L 394.0857142857145 232.303828 L 424.40000000000015 229.03857200000002 L 454.7142857142858 225.78366000000003 L 485.02857142857135 222.54426400000003 L 515.3428571428569 219.316936 L 545.6571428571431 216.108572 L 575.9714285714288 212.91744800000004 L 606.2857142857143 209.74528800000002 L 636.5999999999999 206.59554 L 666.9142857142856 203.46820400000001 L 697.2285714285717 200.36328000000003 L 727.5428571428573 197.28594000000004 L 757.8571428571429 194.23446000000004 L 788.1714285714286 191.20884000000004 L 818.4857142857142 188.21425200000004 L 848.8000000000003 185.24724800000004 L 879.1142857142859 182.31300000000002 L 909.4285714285716 179.40806000000003 L 909.4285714285716 179.40806000000003 L 939.7428571428571 176.53760000000003 L 970.0571428571427 173.69817200000006 L 1000.3714285714289 170.89494800000006 L 1030.6857142857145 168.12448 L 1061 165.390216 L 1061 165.390216" stroke="#7cb5ec" stroke-width="3" zIndex="1" stroke-linejoin="round" stroke-linecap="round"></path></g><g class="highcharts-markers highcharts-tracker" visibility="visible" zIndex="0.1" transform="translate(69,10) scale(1 1)" style="" clip-path="none"></g><g class="highcharts-series highcharts-tracker" visibility="visible" zIndex="0.1" transform="translate(69,10) scale(1 1)" style="" clip-path="url(#highcharts-1)"><path fill="none" d="M 0 376.24576 L 30.31428571428561 376.24576 L 60.62857142857122 376.24576 L 90.94285714285736 376.24576 L 121.25714285714298 376.24576 L 151.57142857142858 376.235416 L 151.57142857142858 376.235416 L 181.8857142857142 362.45376 L 212.1999999999998 348.66176 L 242.51428571428596 334.86976000000004 L 272.82857142857154 321.07776 L 303.14285714285717 307.28576 L 333.4571428571428 293.49376 L 363.7714285714284 279.70176000000004 L 394.0857142857145 265.90976 L 424.40000000000015 252.11776000000003 L 454.7142857142858 238.32576 L 485.02857142857135 224.53376000000003 L 515.3428571428569 210.74176000000003 L 545.6571428571431 196.94976000000003 L 575.9714285714288 183.15776 L 606.2857142857143 169.36576000000002 L 636.5999999999999 155.57376000000005 L 666.9142857142856 141.78176000000002 L 697.2285714285717 127.98976000000005 L 727.5428571428573 114.19776000000007 L 757.8571428571429 100.40575999999999 L 788.1714285714286 86.61376000000007 L 818.4857142857142 72.82176000000004 L 848.8000000000003 59.02976000000001 L 879.1142857142859 45.237760000000094 L 909.4285714285716 31.45955200000003 L 909.4285714285716 31.45955200000003 L 939.7428571428571 31.445760000000007 L 970.0571428571427 31.445760000000007 L 1000.3714285714289 31.445760000000007 L 1030.6857142857145 31.445760000000007 L 1061 31.445760000000007 L 1061 31.445760000000007" stroke="#f7a35c" stroke-width="3" zIndex="1" stroke-linejoin="round" stroke-linecap="round"></path></g><g class="highcharts-markers highcharts-tracker" visibility="visible" zIndex="0.1" transform="translate(69,10) scale(1 1)" style="" clip-path="none"></g></g><g class="highcharts-legend" zIndex="7" transform="translate(110,80)"><rect x="0.5" y="0.5" width="82" height="44" strokeWidth="1" stroke="#909090" stroke-width="1" fill="#FFFFFF" visibility="visible"></rect><g zIndex="1"><g><g class="highcharts-legend-item" zIndex="1" transform="translate(8,3)"><path fill="none" d="M 0 12 L 16 12" stroke="#7cb5ec" stroke-width="3"></path><path fill="#7cb5ec" d="M 8 12 C 8 12 8 12 8 12 C 8 12 8 12 8 12 Z"></path><text x="21" style="color:#333333;font-size:13px;font-weight:bold;cursor:pointer;fill:#333333;" text-anchor="start" zIndex="2" y="16">Today</text></g><g class="highcharts-legend-item" zIndex="1" transform="translate(8,20)"><path fill="none" d="M 0 12 L 16 12" stroke="#f7a35c" stroke-width="3"></path><path fill="#f7a35c" d="M 8 12 L 8 12 8 12 8 12 Z"></path><text x="21" y="16" style="color:#333333;font-size:13px;font-weight:bold;cursor:pointer;fill:#333333;" text-anchor="start" zIndex="2"><tspan>At Expiry</tspan></text></g></g></g></g><g class="highcharts-axis-labels highcharts-xaxis-labels" zIndex="7"><text x="125.83928571428572" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:92px;text-overflow:clip;" text-anchor="middle" transform="translate(0,0)" y="461" opacity="1">97.5</text><text x="220.57142857142858" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:92px;text-overflow:clip;" text-anchor="middle" transform="translate(0,0)" y="461" opacity="1">100</text><text x="315.30357142857144" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:92px;text-overflow:clip;" text-anchor="middle" transform="translate(0,0)" y="461" opacity="1">102.5</text><text x="410.03571428571433" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:92px;text-overflow:clip;" text-anchor="middle" transform="translate(0,0)" y="461" opacity="1">105</text><text x="504.76785714285717" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:92px;text-overflow:clip;" text-anchor="middle" transform="translate(0,0)" y="461" opacity="1">107.5</text><text x="599.5" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:92px;text-overflow:clip;" text-anchor="middle" transform="translate(0,0)" y="461" opacity="1">110</text><text x="694.2321428571429" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:92px;text-overflow:clip;" text-anchor="middle" transform="translate(0,0)" y="461" opacity="1">112.5</text><text x="788.9642857142858" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:92px;text-overflow:clip;" text-anchor="middle" transform="translate(0,0)" y="461" opacity="1">115</text><text x="883.6964285714287" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:92px;text-overflow:clip;" text-anchor="middle" transform="translate(0,0)" y="461" opacity="1">117.5</text><text x="978.4285714285716" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:92px;text-overflow:clip;" text-anchor="middle" transform="translate(0,0)" y="461" opacity="1">120</text><text x="1073.1607142857142" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:92px;text-overflow:clip;" text-anchor="middle" transform="translate(0,0)" y="461" opacity="1">122.5</text></g><g class="highcharts-axis-labels highcharts-yaxis-labels" zIndex="7"><text x="54" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:366px;text-overflow:clip;" text-anchor="end" transform="translate(0,0)" y="445" opacity="1">-10</text><text x="54" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:366px;text-overflow:clip;" text-anchor="end" transform="translate(0,0)" y="402" opacity="1">-7.5</text><text x="54" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:366px;text-overflow:clip;" text-anchor="end" transform="translate(0,0)" y="359" opacity="1">-5</text><text x="54" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:366px;text-overflow:clip;" text-anchor="end" transform="translate(0,0)" y="316" opacity="1">-2.5</text><text x="54" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:366px;text-overflow:clip;" text-anchor="end" transform="translate(0,0)" y="273" opacity="1">0</text><text x="54" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:366px;text-overflow:clip;" text-anchor="end" transform="translate(0,0)" y="230" opacity="1">2.5</text><text x="54" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:366px;text-overflow:clip;" text-anchor="end" transform="translate(0,0)" y="187" opacity="1">5</text><text x="54" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:366px;text-overflow:clip;" text-anchor="end" transform="translate(0,0)" y="144" opacity="1">7.5</text><text x="54" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:366px;text-overflow:clip;" text-anchor="end" transform="translate(0,0)" y="100" opacity="1">10</text><text x="54" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:366px;text-overflow:clip;" text-anchor="end" transform="translate(0,0)" y="57" opacity="1">12.5</text><text x="54" style="color:#606060;cursor:default;font-size:12px;fill:#606060;width:366px;text-overflow:clip;" text-anchor="end" transform="translate(0,0)" y="14" opacity="1">15</text></g><g class="highcharts-tooltip" zIndex="8" style="cursor:default;padding:0;white-space:nowrap;" transform="translate(0,-9999)"><path fill="rgba(219,219,216,0.8)" d="M 3 0 L 13 0 C 16 0 16 0 16 3 L 16 13 C 16 16 16 16 13 16 L 3 16 C 0 16 0 16 0 13 L 0 3 C 0 0 0 0 3 0"></path><text x="8" zIndex="1" style="font-size:12px;color:#333333;fill:#333333;" transform="translate(0,20)"></text></g><text x="1130" text-anchor="end" zIndex="8" style="cursor:pointer;color:#909090;font-size:9px;fill:#909090;" y="495">Highcharts.com</text></svg></div></div>
+
+<div class="row chart_parameters" style="position: relative; top: -20px">
+    <div class="col-md-3 col-xs-4">
+            <div class="form-group form-inline form-group-sm" style="position: relative; left: 50px">
+                <label class="control-label" for="xMin">Min</label>
+                <div class="input-group input-group-sm" style="width: 120px">
+                    <input type="text" id="xMin" class="form-control textbox-with-clear-button" placeholder="Auto"><span class="input-group-btn"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button></span>
+                </div>
+            </div>
+    </div>
+    
+    <div class="col-md-6 col-xs-4">
+    </div>
+
+    <div class="col-md-3 col-xs-4" style="background-color: white">
+        <div style="float: right">
+            <div class="form-group form-inline form-group-sm">
+                <label class="control-label" for="xMax">Max</label>
+                <div class="input-group input-group-sm" style="width: 120px">
+                    <input type="text" id="xMax" class="form-control textbox-with-clear-button" placeholder="Auto"><span class="input-group-btn"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <hr>
+        <p class="text-center" style="font-size: 12px"><b>FnoPro © 2021
+</b></p>
+    </div>
+</footer>    
+</div>
+
+
+<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div></div></body></html>
