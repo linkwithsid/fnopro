@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Options Strategy Builder &amp; Analyzer Online — FnoPro</title>
+    <title>FnoPro Strategy Builder &amp; Analyzer</title>
 
     <meta name="description" content="Create &amp; Analyze options strategies, view options strategy P/L graph – online and 100% free.">
 
@@ -68,7 +68,7 @@
 
 
     <div class="page-header">
-        <h1>Fno Strategy Builder</h1>
+        <h1>FnoPro Strategy Builder &amp; Analyzer</h1>
     </div>
 
 
@@ -94,7 +94,7 @@
             <thead>
                 <tr>
                     <th>
-                        Buy(+)/Sell(-)
+                        &nbspBuy&nbsp/&nbspSell&nbsp
                     </th>
                     <th>
                         Quantity
