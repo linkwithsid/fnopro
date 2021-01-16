@@ -213,8 +213,6 @@ function calculate() {
     </div>
 
 </div>
-
-<br>
 <table width="80%" border="0">
     <label class="control-label">Downside Fibo Levels:</label> 
   <tr>
@@ -241,6 +239,7 @@ function calculate() {
     <td>&nbsp;</td>
   </tr>
 </table>
+<br>
 <br>
 <footer class="footer">
     <div class="container">
