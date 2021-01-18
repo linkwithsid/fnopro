@@ -54,16 +54,14 @@ function calculate() {
         var ATH = document.getElementById('ATH').value; 
         var result5 = document.getElementById('5'); 
         result5.value = ATH*0.95;
-      var result8 = document.getElementById('8');   
-        result8.value = ATH*0.92;
-      var result13 = document.getElementById('13'); 
-        result13.value = ATH*0.87;
-      var result21 = document.getElementById('21'); 
-        result21.value = ATH*0.79;
-      var result34 = document.getElementById('34'); 
-        result34.value = ATH*0.66;
-      var result55 = document.getElementById('55'); 
-        result55.value = ATH*0.45;
+      var result8 = document.getElementById('10');   
+        result8.value = ATH*0.90;
+      var result13 = document.getElementById('18'); 
+        result13.value = ATH*0.82;
+      var result21 = document.getElementById('26'); 
+        result21.value = ATH*0.74;
+      var result34 = document.getElementById('39'); 
+        result34.value = ATH*0.61;
     }
 </script>
 
@@ -227,11 +225,10 @@ function calculate() {
   <tr>
     <td><input id="ATH" type="text" oninput="calculate()" /></td>
     <td><input id="5" type="text" disabled/></td>
-    <td><input id="8" type="text" disabled/></td>
-    <td><input id="13" type="text" disabled/></td>
-    <td><input id="21" type="text" disabled/></td>
-    <td><input id="34" type="text" disabled/></td>
-    <td><input id="55" type="text" disabled/></td>
+    <td><input id="10" type="text" disabled/></td>
+    <td><input id="18" type="text" disabled/></td>
+    <td><input id="26" type="text" disabled/></td>
+    <td><input id="39" type="text" disabled/></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
