@@ -216,11 +216,10 @@ function calculate() {
   <tr>
     <th>ATH</th>
     <th>-5%</th>
-    <th>-8%</th>
-    <th>-13%</th>
-    <th>-21%</th>
-    <th>-34%</th>
-    <th>-55%</th>
+    <th>-10%</th>
+    <th>-18%</th>
+    <th>-26%</th>
+    <th>-39%</th>
   </tr>
   <tr>
     <td><input id="ATH" type="text" oninput="calculate()" /></td>
